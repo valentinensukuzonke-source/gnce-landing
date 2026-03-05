@@ -25,6 +25,13 @@
     .code-font {
       font-family: 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
     }
+    @keyframes spin-slow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .gnce-logo-spin {
+      animation: spin-slow 18s linear infinite;
+    }
   </style>
 </head>
 <body class="antialiased">
@@ -37,6 +44,15 @@
 
   <!-- Hero Section -->
   <section class="max-w-4xl mx-auto py-20 px-6 text-center">
+    <div class="flex justify-center mb-8">
+      <div class="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-tr from-blue-500 to-cyan-400 flex items-center justify-center">
+        <img
+          src="assets/gn_logo_mark.png"
+          alt="GNCE Logo"
+          class="w-16 h-16 md:w-20 md:h-20 gnce-logo-spin"
+        />
+      </div>
+    </div>
     <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
       Sovereignty as Code.
     </h1>
