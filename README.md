@@ -23,6 +23,21 @@ Search for `gnce-labs/gnce-sandbox` in `index.html` and update all three occurre
 
 So the flow is: land on page → request access → (after approval) use the Sandbox link to get to the repo.
 
+## Request Sandbox Access form (Formspree)
+
+The form uses **Formspree** so submissions work from **any** mail setup (Gmail, Outlook, Yahoo, webmail-only). No `mailto:` – the form posts to Formspree and they email you.
+
+**One-time setup:**
+
+1. Go to [formspree.io](https://formspree.io) and sign up (free).
+2. Create a new form and set the notification email to **valentine.nsukuzonke@gmail.com**.
+3. Copy your **form ID** (the string in the URL they give you, e.g. `https://formspree.io/f/xyzabc` → `xyzabc`).
+4. In `index.html`, find `FORMSPREE_FORM_ID` and replace it with your form ID:
+   - `action="https://formspree.io/f/FORMSPREE_FORM_ID"` → `action="https://formspree.io/f/xyzabc"` (your ID).
+5. Push to GitHub; the live form will then submit to Formspree and you’ll get emails at valentine.nsukuzonke@gmail.com with subject `[GNCE Sandbox Access]`.
+
+Until you replace `FORMSPREE_FORM_ID`, the form will post to an invalid URL. Do the setup above so requests reach your inbox.
+
 ## Local preview
 
 Open `index.html` in a browser, or serve the folder with any static server (e.g. `npx serve .`).

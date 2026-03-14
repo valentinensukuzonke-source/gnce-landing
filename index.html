@@ -144,7 +144,10 @@
         and <span class="font-mono">@microsoft.com</span> verified domains.
       </p>
     </div>
-    <form id="sandbox-request-form" class="space-y-6">
+    <!-- Form submits to Formspree – works with any mail (Gmail, Outlook, Yahoo, webmail). Replace FORMSPREE_FORM_ID with your form ID from https://formspree.io -->
+    <form id="sandbox-request-form" action="https://formspree.io/f/xaqpdnvv" method="POST" class="space-y-6">
+      <input type="hidden" name="_subject" value="[GNCE Sandbox Access]" />
+      <input type="hidden" name="_replyto" id="form-replyto" value="" />
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <input
           type="text"
@@ -177,7 +180,7 @@
         Authorize Access Request
       </button>
       <p class="text-xs text-gray-500 text-center mt-2">
-        Opens your email client with recipient and subject pre-filled. Send the email to complete the request.
+        Submits online and is sent to valentine.nsukuzonke@gmail.com. Works from any browser (Gmail, Outlook, Yahoo, etc.).
       </p>
       <p class="text-xs text-gray-400 text-center mt-1 font-mono">
         Requests are sent to: valentine.nsukuzonke@gmail.com
@@ -186,20 +189,11 @@
   </section>
 
   <script>
-    document.getElementById('sandbox-request-form').addEventListener('submit', function (e) {
-      e.preventDefault();
-      var form = e.target;
-      var name = (form.querySelector('[name="name"]') || {}).value || '';
-      var email = (form.querySelector('[name="email"]') || {}).value || '';
-      var github = (form.querySelector('[name="github"]') || {}).value || '';
-      var usecase = (form.querySelector('[name="usecase"]') || {}).value || '';
-      var body = 'Full Name: ' + encodeURIComponent(name) + '\n'
-        + 'Work Email: ' + encodeURIComponent(email) + '\n'
-        + 'GitHub/GitLab: ' + encodeURIComponent(github) + '\n\n'
-        + 'Integration Use-Case:\n' + encodeURIComponent(usecase);
-      var toAddress = 'valentine.nsukuzonke@gmail.com';
-      var mailto = 'mailto:' + encodeURIComponent('GNCE Sandbox <' + toAddress + '>').replace('%40', '@') + '?subject=' + encodeURIComponent('[GNCE Sandbox Access]') + '&body=' + body;
-      window.location.href = mailto;
+    document.getElementById('sandbox-request-form').addEventListener('submit', function () {
+      var emailField = this.querySelector('[name="email"]');
+      if (emailField && emailField.value) {
+        document.getElementById('form-replyto').value = emailField.value;
+      }
     });
   </script>
 
