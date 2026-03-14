@@ -39,7 +39,11 @@
   <!-- Navigation -->
   <nav class="p-6 border-b border-gray-800 flex justify-between items-center max-w-7xl mx-auto">
     <div class="text-xl font-bold tracking-tighter text-blue-500 uppercase">GNCE Labs</div>
-    <div class="text-sm code-font text-gray-500">v2.4.0_stable // stargate_ready</div>
+    <div class="flex items-center gap-6">
+      <!-- Replace href with your actual sandbox repo URL (e.g. GitHub private repo) after access is granted -->
+      <a href="https://github.com/gnce-labs/gnce-sandbox" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-gray-400 hover:text-blue-400 transition-colors">Sandbox</a>
+      <span class="text-sm code-font text-gray-500">v2.4.0_stable // stargate_ready</span>
+    </div>
   </nav>
 
   <!-- Hero Section -->
@@ -66,7 +70,11 @@
       <a href="#demo" class="border border-gray-700 hover:border-gray-500 px-8 py-3 rounded-md font-bold transition-all">
         View Terminal Proof
       </a>
+      <a href="https://github.com/gnce-labs/gnce-sandbox" target="_blank" rel="noopener noreferrer" class="border border-gray-600 text-gray-300 hover:border-blue-500 hover:text-blue-400 px-8 py-3 rounded-md font-bold transition-all">
+        Open Sandbox
+      </a>
     </div>
+    <p class="text-sm text-gray-500 mt-4">Have access? The sandbox lets you run banking, insurance, adversarial, and G42 scenarios against the GNCE kernel.</p>
   </section>
 
   <!-- Terminal Proof (The Hook) -->
@@ -128,51 +136,77 @@
   <section id="request" class="max-w-2xl mx-auto px-6 py-24 border-t border-gray-900">
     <div class="text-center mb-12">
       <h2 class="text-3xl font-bold mb-4">Request Sandbox Access</h2>
-      <p class="text-gray-400">
+      <p class="text-gray-400 mb-2">
+        Sandbox access is granted via GitHub – we need your info to integrate your accounts and confirm your intent to request access.
+      </p>
+      <p class="text-gray-500 text-sm">
         Restricted to <span class="font-mono">@g42.ai</span>, <span class="font-mono">@openai.com</span>,
         and <span class="font-mono">@microsoft.com</span> verified domains.
       </p>
     </div>
-    <!-- For now this is a visual form only; hook it up to Formspree, AidaForm, or your own backend when ready -->
-    <form class="space-y-6">
+    <form id="sandbox-request-form" class="space-y-6">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <input
           type="text"
+          name="name"
           placeholder="Full Name"
           class="bg-gray-900 border border-gray-800 p-3 rounded-md w-full focus:border-blue-500 outline-none"
         />
         <input
           type="email"
+          name="email"
           placeholder="Work Email"
           class="bg-gray-900 border border-gray-800 p-3 rounded-md w-full focus:border-blue-500 outline-none"
         />
       </div>
       <input
         type="text"
+        name="github"
         placeholder="GitHub / GitLab Username"
         class="bg-gray-900 border border-gray-800 p-3 rounded-md w-full focus:border-blue-500 outline-none"
       />
       <textarea
+        name="usecase"
         placeholder="Integration Use-Case (e.g., Stargate Phase 1 – 200MW Cluster)"
         class="bg-gray-900 border border-gray-800 p-3 rounded-md w-full h-32 focus:border-blue-500 outline-none"
       ></textarea>
       <button
-        type="button"
+        type="submit"
         class="w-full bg-gradient-to-r from-blue-600 to-purple-600 py-4 rounded-md font-bold text-lg hover:brightness-110 transition-all uppercase"
       >
         Authorize Access Request
       </button>
       <p class="text-xs text-gray-500 text-center mt-2">
-        For now, please email your details to
-        <span class="font-mono">valentine.nsukuzonke@gmail.com</span> with subject
-        <span class="font-mono">[GNCE Sandbox Access]</span>.
+        Opens your email client with recipient and subject pre-filled. Send the email to complete the request.
       </p>
     </form>
   </section>
 
+  <script>
+    document.getElementById('sandbox-request-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var form = e.target;
+      var name = (form.querySelector('[name="name"]') || {}).value || '';
+      var email = (form.querySelector('[name="email"]') || {}).value || '';
+      var github = (form.querySelector('[name="github"]') || {}).value || '';
+      var usecase = (form.querySelector('[name="usecase"]') || {}).value || '';
+      var body = 'Full Name: ' + encodeURIComponent(name) + '\n'
+        + 'Work Email: ' + encodeURIComponent(email) + '\n'
+        + 'GitHub/GitLab: ' + encodeURIComponent(github) + '\n\n'
+        + 'Integration Use-Case:\n' + encodeURIComponent(usecase);
+      var mailto = 'mailto:valentine.nsukuzonke@gmail.com?subject=' + encodeURIComponent('[GNCE Sandbox Access]') + '&body=' + body;
+      window.location.href = mailto;
+    });
+  </script>
+
   <!-- Footer -->
   <footer class="py-12 border-t border-gray-900 text-center text-gray-600 text-xs code-font">
-    © 2026 GN Sovereign IP Trust // GNCE Labs – Sovereignty as Code.
+    <p class="mb-2">
+      <a href="https://github.com/gnce-labs/gnce-sandbox" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-blue-400 transition-colors">Sandbox</a>
+      <span class="mx-2">·</span>
+      <a href="#request" class="text-gray-500 hover:text-blue-400 transition-colors">Request Access</a>
+    </p>
+    <p>© 2026 GN Sovereign IP Trust // GNCE Labs – Sovereignty as Code.</p>
   </footer>
 
 </body>
