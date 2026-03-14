@@ -179,6 +179,9 @@
       <p class="text-xs text-gray-500 text-center mt-2">
         Opens your email client with recipient and subject pre-filled. Send the email to complete the request.
       </p>
+      <p class="text-xs text-gray-400 text-center mt-1 font-mono">
+        Requests are sent to: valentine.nsukuzonke@gmail.com
+      </p>
     </form>
   </section>
 
@@ -194,7 +197,8 @@
         + 'Work Email: ' + encodeURIComponent(email) + '\n'
         + 'GitHub/GitLab: ' + encodeURIComponent(github) + '\n\n'
         + 'Integration Use-Case:\n' + encodeURIComponent(usecase);
-      var mailto = 'mailto:valentine.nsukuzonke@gmail.com?subject=' + encodeURIComponent('[GNCE Sandbox Access]') + '&body=' + body;
+      var toAddress = 'valentine.nsukuzonke@gmail.com';
+      var mailto = 'mailto:' + encodeURIComponent('GNCE Sandbox <' + toAddress + '>').replace('%40', '@') + '?subject=' + encodeURIComponent('[GNCE Sandbox Access]') + '&body=' + body;
       window.location.href = mailto;
     });
   </script>
