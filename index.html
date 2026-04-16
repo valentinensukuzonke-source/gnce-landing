@@ -86,34 +86,42 @@
           <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
           <div class="w-3 h-3 bg-green-500 rounded-full"></div>
         </div>
-        <div class="ml-4 text-xs code-font text-gray-500">tests/adversarial/test_iso42001_cross_border_health_export_escalation.py</div>
+        <div class="ml-4 text-xs code-font text-gray-500">tests/healthcare/test_healthcare_consequence_bands.py</div>
       </div>
       <div class="p-6 code-font text-sm leading-relaxed overflow-x-auto text-green-400">
-        <p>&gt; py -3 tests\\adversarial\\test_iso42001_cross_border_health_export_escalation.py</p>
+        <p>&gt; py -3 tests\\healthcare\\test_healthcare_consequence_bands.py</p>
         <p class="text-white mt-2">------------------------------------------------------------</p>
-        <p class="text-white">GNCE v2.4.0: HEALTHCARE AI – CROSS-BORDER DATA EXPORT GOVERNANCE</p>
+        <p class="text-white">GNCE v2.4.0: EU HEALTHCARE AI – CLINICAL CONSEQUENCE BANDS</p>
         <p class="text-white">------------------------------------------------------------</p>
         <p class="text-blue-400 mt-2">routing intent → constitutional router → catalog → kernel</p>
-        <p class="text-yellow-400 mt-4">SCENARIO: Automated export of patient summary to external jurisdiction</p>
-        <p>Jurisdiction: UAE | Industry: HEALTHCARE | Action: EXPORT_HEALTH_DATA</p>
+        <p class="text-yellow-400 mt-4">SCENARIO: Autonomous treatment without sovereign warrant</p>
+        <p>Jurisdiction: EU | Industry: HEALTHCARE | Action: AUTONOMOUS_TREATMENT</p>
         <p class="text-red-500 font-bold mt-2">Verdict: REQUIRE_WARRANT</p>
-        <p>Reason: High-risk clinical data export requires human authorization + traceable oversight</p>
+        <p>Reason: BAND_4 clinical action requires sovereign warrant before autonomous execution</p>
+        <p class="text-white mt-4">L0-L8 layer status (excerpt):</p>
+        <p>L0  Trust boundary: PASS</p>
+        <p>L1  Jurisdiction Router: EU → healthcare stack selected</p>
+        <p>L2  Rule engines: consequence banding + healthcare transaction integrity</p>
+        <p>L3  DRE: 1 warrant-required violation → REQUIRE_WARRANT</p>
+        <p>L4  ADRAs forged: healthcare rationale sealed</p>
+        <p>L7  SARS Ledger: PRECOMMIT → MINT → SEAL → FINALIZE</p>
         <p class="text-white mt-4">SARS Ledger metadata (excerpt):</p>
         <p class="text-gray-300">{</p>
-        <p class="text-gray-300">&nbsp;&nbsp;"Regime": "HEALTHCARE_AI",</p>
-        <p class="text-gray-300">&nbsp;&nbsp;"Domain": "Clinical AI governance & patient data integrity",</p>
-        <p class="text-gray-300">&nbsp;&nbsp;"Primary Blocking Authority": "HEALTHCARE_AI: REQUIRE_WARRANT",</p>
-        <p class="text-gray-300">&nbsp;&nbsp;"Clinical risk tier": "—",</p>
-        <p class="text-gray-300">&nbsp;&nbsp;"Clinical consequence band": "—",</p>
-        <p class="text-gray-300">&nbsp;&nbsp;"Clinical AI risk tier": "—",</p>
+        <p class="text-gray-300">&nbsp;&nbsp;"Regime": "HEALTHCARE_TRANSACTION_INTEGRITY",</p>
+        <p class="text-gray-300">&nbsp;&nbsp;"Domain": "EU healthcare AI safety & patient-risk governance",</p>
+        <p class="text-gray-300">&nbsp;&nbsp;"Primary Blocking Authority": "HEALTHCARE_TRANSACTION_INTEGRITY: HEALTHCARE.MISSING_SOVEREIGN_WARRANT",</p>
+        <p class="text-gray-300">&nbsp;&nbsp;"Clinical risk tier": "CRITICAL",</p>
+        <p class="text-gray-300">&nbsp;&nbsp;"Clinical consequence band": "BAND_4",</p>
+        <p class="text-gray-300">&nbsp;&nbsp;"Clinical AI risk tier": "1",</p>
         <p class="text-gray-300">&nbsp;&nbsp;"Healthcare failure severity": "—",</p>
         <p class="text-gray-300">&nbsp;&nbsp;"Hallucination type": "—",</p>
         <p class="text-gray-300">&nbsp;&nbsp;"Drift magnitude": "—",</p>
         <p class="text-gray-300">&nbsp;&nbsp;"Parametric trigger": "—",</p>
         <p class="text-gray-300">&nbsp;&nbsp;"Insurance exposure score": "—",</p>
-        <p class="text-gray-300">&nbsp;&nbsp;"Clinical attestation gaps": "—"</p>
+        <p class="text-gray-300">&nbsp;&nbsp;"Clinical attestation gaps": "missing sovereign_warrant_id"</p>
         <p class="text-gray-300">}</p>
-        <p class="text-green-500 mt-4">AUDIT STORY: router-selected regimes → per-regime ADRAs → DRE verdict → immutable SARS receipt</p>
+        <p class="text-white mt-4">Summary:</p>
+        <p class="text-green-500">test_band4_missing_warrant_require_warrant → REQUIRE_WARRANT → primary authority correctly pinned to healthcare warrant article</p>
       </div>
     </div>
   </section>
