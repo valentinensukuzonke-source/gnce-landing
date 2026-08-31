@@ -16,7 +16,7 @@ Edit **`sandbox-config.js`**:
 
 ```javascript
 window.GNCE_SANDBOX = {
-  url: "https://your-eval-host.example.com",
+  url: "https://sandbox.gnce.co.za",
   healthPath: "/healthz",
   evaluatePath: "/v1/evaluate",
   sampleFile: "samples/uae_healthcare_evaluate_sample.json",

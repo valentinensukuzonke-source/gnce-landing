@@ -195,7 +195,7 @@
   <script>
     (function () {
       var cfg = window.GNCE_SANDBOX || {};
-      var base = (cfg.url || "https://eval.gnce.dev").replace(/\/$/, "");
+      var base = (cfg.url || "https://sandbox.gnce.co.za").replace(/\/$/, "");
       var evaluateUrl = base + (cfg.evaluatePath || "/v1/evaluate");
       var healthUrl = base + (cfg.healthPath || "/healthz");
       var sampleFile = cfg.sampleFile || "samples/uae_healthcare_evaluate_sample.json";
