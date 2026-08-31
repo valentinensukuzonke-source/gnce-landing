@@ -1,0 +1,27 @@
+{
+  "action": "PROCESS_PATIENT_DATA",
+  "resource": "patient_record_12345",
+  "jurisdiction": "UAE",
+  "industry_id": "UAE_HEALTHCARE",
+  "metadata": {
+    "jurisdiction": "UAE",
+    "industry_id": "UAE_HEALTHCARE",
+    "hospital": "G42_SMART_HOSPITAL_ABU_DHABI",
+    "data_persistence": {
+      "persistence_scope": "memory_only"
+    }
+  },
+  "patient": {
+    "nationality": "UAE",
+    "consent": {
+      "data_processing": true,
+      "consent_id": "C-2026-001"
+    }
+  },
+  "data_elements": [
+    "diagnosis",
+    "treatment_plan",
+    "billing_info"
+  ],
+  "processing_purpose": "clinical_decision_support"
+}

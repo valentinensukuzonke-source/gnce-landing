@@ -4,18 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GNCE v2.4.0 | Sovereign Resolution Engine</title>
-
-  <!-- Tailwind CDN (for fast iteration; you can switch to a compiled build later) -->
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Fira+Code:wght@400;600&display=swap"
     rel="stylesheet"
   />
-
   <style>
     body {
       font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -33,20 +28,18 @@
       animation: spin-slow 18s linear infinite;
     }
   </style>
+  <script src="sandbox-config.js"></script>
 </head>
 <body class="antialiased">
 
-  <!-- Navigation -->
   <nav class="p-6 border-b border-gray-800 flex justify-between items-center max-w-7xl mx-auto">
     <div class="text-xl font-bold tracking-tighter text-blue-500 uppercase">GNCE Labs</div>
     <div class="flex items-center gap-6">
-      <!-- Replace href with your actual sandbox repo URL (e.g. GitHub private repo) after access is granted -->
-      <a href="https://github.com/valentinensukuzonke-source/gnce-sandbox" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-gray-400 hover:text-blue-400 transition-colors">Sandbox</a>
+      <a href="#try" class="text-sm font-semibold text-gray-400 hover:text-blue-400 transition-colors">Try sandbox</a>
       <span class="text-sm code-font text-gray-500">v2.4.0_stable // stargate_ready</span>
     </div>
   </nav>
 
-  <!-- Hero Section -->
   <section class="max-w-4xl mx-auto py-20 px-6 text-center">
     <div class="flex justify-center mb-8">
       <div class="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-tr from-slate-900 via-slate-800 to-slate-900 border border-slate-600/70 flex items-center justify-center">
@@ -61,23 +54,66 @@
       Sovereignty as Code.
     </h1>
     <p class="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
-      Deterministic L0–L8 governance for autonomous agents. Enforce the <span class="font-semibold">UAE AI Act Tier 4</span> at the execution boundary for Stargate‑class infrastructure.
+      Deterministic L0–L8 governance for autonomous agents. Enforce the
+      <span class="font-semibold">UAE AI Act Tier 4</span> at the execution boundary for Stargate‑class infrastructure.
     </p>
     <div class="flex flex-col sm:flex-row justify-center gap-4">
-      <a href="#request" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-md font-bold transition-all shadow-lg shadow-blue-900/20">
-        Request Sandbox Access
+      <a href="#try" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-md font-bold transition-all shadow-lg shadow-blue-900/20">
+        Try Sandbox
       </a>
       <a href="#demo" class="border border-gray-700 hover:border-gray-500 px-8 py-3 rounded-md font-bold transition-all">
         View Terminal Proof
       </a>
-      <a href="https://github.com/valentinensukuzonke-source/gnce-sandbox" target="_blank" rel="noopener noreferrer" class="border border-gray-600 text-gray-300 hover:border-blue-500 hover:text-blue-400 px-8 py-3 rounded-md font-bold transition-all">
-        Open Sandbox
-      </a>
     </div>
-    <p class="text-sm text-gray-500 mt-4">Have access? The sandbox lets you run banking, insurance, adversarial, and G42 scenarios against the GNCE kernel.</p>
+    <p class="text-sm text-gray-500 mt-4">
+      One HTTP call. No install, no GitHub access, no source code.
+    </p>
   </section>
 
-  <!-- Terminal Proof (The Hook) -->
+  <!-- Try sandbox — hosted /v1/evaluate -->
+  <section id="try" class="max-w-5xl mx-auto px-6 py-12 border-t border-gray-900">
+    <div class="text-center mb-10">
+      <h2 class="text-3xl font-bold mb-3">Try the sandbox</h2>
+      <p class="text-gray-400 max-w-2xl mx-auto">
+        POST a UAE healthcare intent to the hosted GNCE gateway. You get a constitutional verdict, regime routing, and a sealed SARS receipt — typically in under 300&nbsp;ms (warm).
+      </p>
+      <p class="text-sm text-gray-500 mt-3 code-font">
+        Endpoint: <span id="endpoint-display" class="text-blue-400">loading…</span>
+        <span class="mx-2">·</span>
+        <a id="health-link" href="#" class="text-gray-400 hover:text-green-400">health check</a>
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="bg-[#121212] rounded-xl border border-gray-800 overflow-hidden">
+        <div class="flex items-center justify-between px-4 py-2 bg-gray-900 border-b border-gray-800">
+          <span class="text-xs code-font text-gray-500">curl — UAE / G42 Smart Hospital</span>
+          <button type="button" id="copy-curl" class="text-xs text-blue-400 hover:text-blue-300 font-semibold">Copy</button>
+        </div>
+        <pre id="curl-block" class="p-4 code-font text-xs text-green-400 overflow-x-auto whitespace-pre-wrap break-all"></pre>
+      </div>
+
+      <div class="bg-[#121212] rounded-xl border border-gray-800 overflow-hidden">
+        <div class="flex items-center justify-between px-4 py-2 bg-gray-900 border-b border-gray-800">
+          <span class="text-xs code-font text-gray-500">sample payload</span>
+          <div class="flex gap-3">
+            <button type="button" id="copy-json" class="text-xs text-blue-400 hover:text-blue-300 font-semibold">Copy</button>
+            <a id="download-json" href="samples/uae_healthcare_evaluate_sample.json" download class="text-xs text-purple-400 hover:text-purple-300 font-semibold">Download</a>
+          </div>
+        </div>
+        <pre id="json-block" class="p-4 code-font text-xs text-gray-300 overflow-x-auto max-h-80"></pre>
+      </div>
+    </div>
+
+    <div class="mt-8 text-center">
+      <p class="text-gray-500 text-sm mb-4">Expected: <span class="text-green-400 font-semibold">verdict: ALLOW</span>, UAE PDPL + healthcare regimes, full L0–L8 trace in the response.</p>
+      <p class="text-xs text-gray-600">
+        Khazna sovereign fork and extended scenario packs are licensed next steps — not required for this screen.
+      </p>
+    </div>
+  </section>
+
+  <!-- Terminal Proof -->
   <section id="demo" class="max-w-5xl mx-auto px-6 py-10">
     <div class="bg-[#121212] rounded-xl border border-gray-800 shadow-2xl overflow-hidden">
       <div class="flex items-center px-4 py-2 bg-gray-900 border-b border-gray-800">
@@ -86,47 +122,30 @@
           <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
           <div class="w-3 h-3 bg-green-500 rounded-full"></div>
         </div>
-        <div class="ml-4 text-xs code-font text-gray-500">tests/healthcare/test_healthcare_consequence_bands.py</div>
+        <div class="ml-4 text-xs code-font text-gray-500">POST /v1/evaluate — G42 Smart Hospital Abu Dhabi</div>
       </div>
       <div class="p-6 code-font text-sm leading-relaxed overflow-x-auto text-green-400">
-        <p>&gt; py -3 tests\\healthcare\\test_healthcare_consequence_bands.py</p>
+        <p>&gt; curl -X POST …/v1/evaluate -d @uae_healthcare_evaluate_sample.json</p>
         <p class="text-white mt-2">------------------------------------------------------------</p>
-        <p class="text-white">GNCE v2.4.0: EU HEALTHCARE AI – CLINICAL CONSEQUENCE BANDS</p>
+        <p class="text-white">GNCE v2.4.0: UAE HEALTHCARE — CLINICAL DECISION SUPPORT</p>
         <p class="text-white">------------------------------------------------------------</p>
         <p class="text-blue-400 mt-2">routing intent → constitutional router → catalog → kernel</p>
-        <p class="text-yellow-400 mt-4">SCENARIO: Autonomous treatment without sovereign warrant</p>
-        <p>Jurisdiction: EU | Industry: HEALTHCARE | Action: AUTONOMOUS_TREATMENT</p>
-        <p class="text-red-500 font-bold mt-2">Verdict: REQUIRE_WARRANT</p>
-        <p>Reason: BAND_4 clinical action requires sovereign warrant before autonomous execution</p>
+        <p class="text-yellow-400 mt-4">SCENARIO: AI-assisted clinical decision support</p>
+        <p>Jurisdiction: UAE | Industry: UAE_HEALTHCARE | Hospital: G42_SMART_HOSPITAL_ABU_DHABI</p>
+        <p class="text-green-500 font-bold mt-2">Verdict: ALLOW</p>
+        <p>Reason: constitutional classifications satisfied under UAE PDPL + healthcare integrity</p>
         <p class="text-white mt-4">L0-L8 layer status (excerpt):</p>
         <p>L0  Trust boundary: PASS</p>
-        <p>L1  Jurisdiction Router: EU → healthcare stack selected</p>
-        <p>L2  Rule engines: consequence banding + healthcare transaction integrity</p>
-        <p>L3  DRE: 1 warrant-required violation → REQUIRE_WARRANT</p>
+        <p>L1  Jurisdiction Router: UAE → healthcare stack selected</p>
+        <p>L2  Intent integrity + guardrails: PASS</p>
+        <p>L3  DRE: regime evaluations complete</p>
         <p>L4  ADRAs forged: healthcare rationale sealed</p>
         <p>L7  SARS Ledger: PRECOMMIT → MINT → SEAL → FINALIZE</p>
-        <p class="text-white mt-4">SARS Ledger metadata (excerpt):</p>
-        <p class="text-gray-300">{</p>
-        <p class="text-gray-300">&nbsp;&nbsp;"Regime": "HEALTHCARE_TRANSACTION_INTEGRITY",</p>
-        <p class="text-gray-300">&nbsp;&nbsp;"Domain": "EU healthcare AI safety & patient-risk governance",</p>
-        <p class="text-gray-300">&nbsp;&nbsp;"Primary Blocking Authority": "HEALTHCARE_TRANSACTION_INTEGRITY: HEALTHCARE.MISSING_SOVEREIGN_WARRANT",</p>
-        <p class="text-gray-300">&nbsp;&nbsp;"Clinical risk tier": "CRITICAL",</p>
-        <p class="text-gray-300">&nbsp;&nbsp;"Clinical consequence band": "BAND_4",</p>
-        <p class="text-gray-300">&nbsp;&nbsp;"Clinical AI risk tier": "1",</p>
-        <p class="text-gray-300">&nbsp;&nbsp;"Healthcare failure severity": "—",</p>
-        <p class="text-gray-300">&nbsp;&nbsp;"Hallucination type": "—",</p>
-        <p class="text-gray-300">&nbsp;&nbsp;"Drift magnitude": "—",</p>
-        <p class="text-gray-300">&nbsp;&nbsp;"Parametric trigger": "—",</p>
-        <p class="text-gray-300">&nbsp;&nbsp;"Insurance exposure score": "—",</p>
-        <p class="text-gray-300">&nbsp;&nbsp;"Clinical attestation gaps": "missing sovereign_warrant_id"</p>
-        <p class="text-gray-300">}</p>
-        <p class="text-white mt-4">Summary:</p>
-        <p class="text-green-500">test_band4_missing_warrant_require_warrant → REQUIRE_WARRANT → primary authority correctly pinned to healthcare warrant article</p>
+        <p class="text-white mt-4">Latency: ~150–300 ms kernel (warm ledger)</p>
       </div>
     </div>
   </section>
 
-  <!-- Three Pillars Section -->
   <section class="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-3 gap-12 border-t border-gray-900">
     <div>
       <h3 class="text-blue-400 font-bold mb-2">Hard Enforcement</h3>
@@ -151,80 +170,76 @@
     </div>
   </section>
 
-  <!-- Request Form Section -->
-  <section id="request" class="max-w-2xl mx-auto px-6 py-24 border-t border-gray-900">
-    <div class="text-center mb-12">
-      <h2 class="text-3xl font-bold mb-4">Request Sandbox Access</h2>
-      <p class="text-gray-400 mb-2">
-        Sandbox access is granted via GitHub – we need your info to integrate your accounts and confirm your intent to request access.
-      </p>
-      <p class="text-gray-500 text-sm">
-        Restricted to <span class="font-mono">@g42.ai</span>, <span class="font-mono">@openai.com</span>,
-        and <span class="font-mono">@microsoft.com</span> verified domains.
-      </p>
-    </div>
-    <!-- Form submits to Formspree – works with any mail (Gmail, Outlook, Yahoo, webmail). Replace FORMSPREE_FORM_ID with your form ID from https://formspree.io -->
-    <form id="sandbox-request-form" action="https://formspree.io/f/xaqpdnvv" method="POST" class="space-y-6">
-      <input type="hidden" name="_subject" value="[GNCE Sandbox Access]" />
-      <input type="hidden" name="_replyto" id="form-replyto" value="" />
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <input
-          type="text"
-          name="name"
-          placeholder="Full Name"
-          class="bg-gray-900 border border-gray-800 p-3 rounded-md w-full focus:border-blue-500 outline-none"
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Work Email"
-          class="bg-gray-900 border border-gray-800 p-3 rounded-md w-full focus:border-blue-500 outline-none"
-        />
-      </div>
-      <input
-        type="text"
-        name="github"
-        placeholder="GitHub / GitLab Username"
-        class="bg-gray-900 border border-gray-800 p-3 rounded-md w-full focus:border-blue-500 outline-none"
-      />
-      <textarea
-        name="usecase"
-        placeholder="Integration Use-Case (e.g., Stargate Phase 1 – 200MW Cluster)"
-        class="bg-gray-900 border border-gray-800 p-3 rounded-md w-full h-32 focus:border-blue-500 outline-none"
-      ></textarea>
-      <button
-        type="submit"
-        class="w-full bg-gradient-to-r from-blue-600 to-purple-600 py-4 rounded-md font-bold text-lg hover:brightness-110 transition-all uppercase"
-      >
-        Authorize Access Request
-      </button>
-      <p class="text-xs text-gray-500 text-center mt-2">
-        Submits online and is sent to valentine.nsukuzonke@gmail.com. Works from any browser (Gmail, Outlook, Yahoo, etc.).
-      </p>
-      <p class="text-xs text-gray-400 text-center mt-1 font-mono">
-        Requests are sent to: valentine.nsukuzonke@gmail.com
-      </p>
-    </form>
+  <section class="max-w-2xl mx-auto px-6 py-16 border-t border-gray-900 text-center">
+    <h2 class="text-2xl font-bold mb-3">Licensed deployment</h2>
+    <p class="text-gray-400 text-sm mb-6">
+      After the hosted eval, contact GNCE Labs for Khazna on‑prem, extended scenario packs, or partner integration.
+    </p>
+    <a
+      href="mailto:valentine.nsukuzonke@gmail.com?subject=GNCE%20%E2%80%94%20post-eval%20licensing"
+      class="inline-block border border-gray-700 hover:border-blue-500 text-gray-300 hover:text-blue-400 px-6 py-3 rounded-md font-semibold transition-all"
+    >
+      valentine.nsukuzonke@gmail.com
+    </a>
   </section>
 
-  <script>
-    document.getElementById('sandbox-request-form').addEventListener('submit', function () {
-      var emailField = this.querySelector('[name="email"]');
-      if (emailField && emailField.value) {
-        document.getElementById('form-replyto').value = emailField.value;
-      }
-    });
-  </script>
-
-  <!-- Footer -->
   <footer class="py-12 border-t border-gray-900 text-center text-gray-600 text-xs code-font">
     <p class="mb-2">
-      <a href="https://github.com/valentinensukuzonke-source/gnce-sandbox" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-blue-400 transition-colors">Sandbox</a>
+      <a href="#try" class="text-gray-500 hover:text-blue-400 transition-colors">Try sandbox</a>
       <span class="mx-2">·</span>
-      <a href="#request" class="text-gray-500 hover:text-blue-400 transition-colors">Request Access</a>
+      <a href="mailto:valentine.nsukuzonke@gmail.com" class="text-gray-500 hover:text-blue-400 transition-colors">Contact</a>
     </p>
     <p>© 2026 GN Sovereign IP Trust // GNCE Labs – Sovereignty as Code.</p>
   </footer>
+
+  <script>
+    (function () {
+      var cfg = window.GNCE_SANDBOX || {};
+      var base = (cfg.url || "https://eval.gnce.dev").replace(/\/$/, "");
+      var evaluateUrl = base + (cfg.evaluatePath || "/v1/evaluate");
+      var healthUrl = base + (cfg.healthPath || "/healthz");
+      var sampleFile = cfg.sampleFile || "samples/uae_healthcare_evaluate_sample.json";
+
+      document.getElementById("endpoint-display").textContent = evaluateUrl;
+      var healthLink = document.getElementById("health-link");
+      healthLink.href = healthUrl;
+      healthLink.target = "_blank";
+      healthLink.rel = "noopener noreferrer";
+
+      var curlText =
+        "curl -sS -X POST \"" + evaluateUrl + "\" \\\n" +
+        "  -H \"Content-Type: application/json\" \\\n" +
+        "  --data-binary @" + sampleFile.split("/").pop();
+
+      document.getElementById("curl-block").textContent = curlText;
+
+      fetch(sampleFile)
+        .then(function (r) { return r.text(); })
+        .then(function (text) {
+          document.getElementById("json-block").textContent = text.trim();
+        })
+        .catch(function () {
+          document.getElementById("json-block").textContent = "(load samples/uae_healthcare_evaluate_sample.json locally)";
+        });
+
+      function copyText(text, btn) {
+        navigator.clipboard.writeText(text).then(function () {
+          var prev = btn.textContent;
+          btn.textContent = "Copied";
+          setTimeout(function () { btn.textContent = prev; }, 1500);
+        });
+      }
+
+      document.getElementById("copy-curl").addEventListener("click", function () {
+        copyText(curlText, this);
+      });
+
+      document.getElementById("copy-json").addEventListener("click", function () {
+        var block = document.getElementById("json-block");
+        copyText(block.textContent, this);
+      });
+    })();
+  </script>
 
 </body>
 </html>
