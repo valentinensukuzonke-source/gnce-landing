@@ -191,10 +191,11 @@
       After the hosted eval, contact GNCE Labs for Khazna on‑prem, extended scenario packs, or partner integration.
     </p>
     <a
-      href="mailto:valentine.nsukuzonke@gmail.com?subject=GNCE%20%E2%80%94%20post-eval%20licensing"
+      id="licensing-email"
+      href="mailto:info@gnce.co.za?subject=GNCE%20%E2%80%94%20post-eval%20licensing"
       class="inline-block border border-gray-700 hover:border-blue-500 text-gray-300 hover:text-blue-400 px-6 py-3 rounded-md font-semibold transition-all"
     >
-      valentine.nsukuzonke@gmail.com
+      info@gnce.co.za
     </a>
   </section>
 
@@ -206,7 +207,7 @@
       <span class="mx-2">·</span>
       <a href="#try" class="text-gray-500 hover:text-blue-400 transition-colors">Try sandbox</a>
       <span class="mx-2">·</span>
-      <a href="mailto:valentine.nsukuzonke@gmail.com" class="text-gray-500 hover:text-blue-400 transition-colors">Contact</a>
+      <a id="contact-email" href="mailto:info@gnce.co.za" class="text-gray-500 hover:text-blue-400 transition-colors">info@gnce.co.za</a>
     </p>
     <p>© 2026 GN Sovereign IP Trust // GNCE Labs – Sovereignty as Code.</p>
   </footer>
@@ -218,6 +219,16 @@
       var evaluateUrl = base + (cfg.evaluatePath || "/v1/evaluate");
       var healthUrl = base + (cfg.healthPath || "/healthz");
       var sampleFile = cfg.sampleFile || "samples/uae_healthcare_evaluate_sample.json";
+      var contactEmail = cfg.contactEmail || "info@gnce.co.za";
+
+      ["licensing-email", "contact-email"].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        el.textContent = contactEmail;
+        el.href = id === "licensing-email"
+          ? "mailto:" + contactEmail + "?subject=GNCE%20%E2%80%94%20post-eval%20licensing"
+          : "mailto:" + contactEmail;
+      });
 
       document.getElementById("endpoint-display").textContent = evaluateUrl;
       var healthLink = document.getElementById("health-link");

@@ -89,6 +89,8 @@ curl -sS https://sandbox.gnce.co.za/healthz
 
 Sandbox API stays at **`https://sandbox.gnce.co.za`** (separate Cloudflare tunnel — not GitHub Pages).
 
+**Contact:** info@gnce.co.za
+
 ## Related repos
 
 | Repo | Role |
