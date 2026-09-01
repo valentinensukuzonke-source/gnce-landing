@@ -32,7 +32,22 @@ Deploy the gateway: see **`HOSTED_EVAL_SANDBOX.md`** in the private `gnce-framew
 | `index.html` | Landing + try-sandbox section |
 | `sandbox-config.js` | Hosted eval base URL (single place to update) |
 | `samples/uae_healthcare_evaluate_sample.json` | G42 Smart Hospital UAE payload |
-| `assets/gn_logo_mark.png` | Logo |
+| `assets/gn_logo_mark.png` | Logo mark (site hero) |
+| `assets/linkedin-company-logo-300.png` | **LinkedIn Company Page logo** (300×300) |
+| `assets/og-image.png` | Social / LinkedIn link preview (1200×630) |
+
+## LinkedIn Company Page logo
+
+LinkedIn only shows a logo on your **Experience** entry when the role is linked to a **Company Page** (not free-text “GNCE Labs”).
+
+1. Create a page: [LinkedIn → Create Company Page](https://www.linkedin.com/company/setup/new/) → **GNCE Labs**
+2. **Website:** `https://www.gnce.co.za`
+3. **Logo upload:** download [`assets/linkedin-company-logo-300.png`](assets/linkedin-company-logo-300.png)  
+   Or after deploy: `https://www.gnce.co.za/assets/linkedin-company-logo-300.png`
+4. **Profile → Experience → Edit** “Founder, Chief Architect” → Company: search **GNCE Labs** and select the page (not plain text)
+5. Save — the Gordian Nexus mark appears within a few minutes
+
+Direct logo URL (live): **https://www.gnce.co.za/assets/linkedin-company-logo-300.png**
 
 ## Local preview
 
