@@ -7,6 +7,7 @@
 
   <!-- Tailwind CDN (for fast iteration; you can switch to a compiled build later) -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="sandbox-config.js"></script>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -40,8 +41,7 @@
   <nav class="p-6 border-b border-gray-800 flex justify-between items-center max-w-7xl mx-auto">
     <div class="text-xl font-bold tracking-tighter text-blue-500 uppercase">GNCE Labs</div>
     <div class="flex items-center gap-6">
-      <!-- Replace href with your actual sandbox repo URL (e.g. GitHub private repo) after access is granted -->
-      <a href="https://github.com/valentinensukuzonke-source/gnce-sandbox" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-gray-400 hover:text-blue-400 transition-colors">Sandbox</a>
+      <a id="nav-sandbox-link" href="https://sandbox.gnce.co.za" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-gray-400 hover:text-blue-400 transition-colors">Sandbox</a>
       <span class="text-sm code-font text-gray-500">v2.4.0_stable // stargate_ready</span>
     </div>
   </nav>
@@ -61,20 +61,48 @@
       Sovereignty as Code.
     </h1>
     <p class="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
-      Deterministic L0–L8 governance for autonomous agents. Enforce the <span class="font-semibold">UAE AI Act Tier 4</span> at the execution boundary for Stargate‑class infrastructure.
+      Deterministic L0–L8 governance for autonomous agents. Apply <span class="font-semibold">policy rules</span> and <span class="font-semibold">regulatory requirements</span> from your constitution catalog at execution time, with auditable verdicts and immutable ledger receipts.
     </p>
     <div class="flex flex-col sm:flex-row justify-center gap-4">
-      <a href="#request" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-md font-bold transition-all shadow-lg shadow-blue-900/20">
-        Request Sandbox Access
+      <a id="hero-try-sandbox" href="https://sandbox.gnce.co.za/healthz" target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-md font-bold transition-all shadow-lg shadow-blue-900/20">
+        Try Live Sandbox
       </a>
       <a href="#demo" class="border border-gray-700 hover:border-gray-500 px-8 py-3 rounded-md font-bold transition-all">
         View Terminal Proof
       </a>
-      <a href="https://github.com/valentinensukuzonke-source/gnce-sandbox" target="_blank" rel="noopener noreferrer" class="border border-gray-600 text-gray-300 hover:border-blue-500 hover:text-blue-400 px-8 py-3 rounded-md font-bold transition-all">
-        Open Sandbox
+      <a href="#api" class="border border-gray-600 text-gray-300 hover:border-blue-500 hover:text-blue-400 px-8 py-3 rounded-md font-bold transition-all">
+        API Quick Start
       </a>
     </div>
-    <p class="text-sm text-gray-500 mt-4">Have access? The sandbox lets you run banking, insurance, adversarial, and G42 scenarios against the GNCE kernel.</p>
+    <p class="text-sm text-gray-500 mt-4">
+      No install required. Hosted at <span id="hero-sandbox-host" class="code-font text-gray-400">sandbox.gnce.co.za</span> — POST <code class="text-blue-400">/v1/evaluate</code> for full L0–L8 trace + SARS receipt.
+    </p>
+  </section>
+
+  <!-- API Quick Start -->
+  <section id="api" class="max-w-5xl mx-auto px-6 py-10">
+    <h2 class="text-2xl font-bold mb-4 text-center">Hosted eval API</h2>
+    <p class="text-gray-400 text-sm text-center mb-6 max-w-2xl mx-auto">
+      One URL, one curl — UAE healthcare sample returns a deterministic verdict with sovereign ledger metadata.
+    </p>
+    <div class="bg-[#121212] rounded-xl border border-gray-800 shadow-2xl overflow-hidden">
+      <div class="flex items-center px-4 py-2 bg-gray-900 border-b border-gray-800">
+        <div class="flex space-x-2">
+          <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+          <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+          <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+        </div>
+        <div class="ml-4 text-xs code-font text-gray-500">curl — UAE healthcare evaluate</div>
+      </div>
+      <div class="p-6 code-font text-sm leading-relaxed overflow-x-auto text-green-400">
+        <p class="text-gray-500"># Health check</p>
+        <p id="curl-health" class="text-white">curl -sS https://sandbox.gnce.co.za/healthz</p>
+        <p class="text-gray-500 mt-4"># Evaluate (sample JSON body)</p>
+        <p id="curl-evaluate" class="text-white whitespace-pre-wrap">curl -sS -X POST "https://sandbox.gnce.co.za/v1/evaluate" \
+  -H "Content-Type: application/json" \
+  -d '{"action":"PROCESS_PATIENT_DATA","jurisdiction":"UAE","industry_id":"UAE_HEALTHCARE",...}'</p>
+      </div>
+    </div>
   </section>
 
   <!-- Terminal Proof (The Hook) -->
@@ -97,7 +125,7 @@
         <p class="text-yellow-400 mt-4">SCENARIO: Autonomous treatment without sovereign warrant</p>
         <p>Jurisdiction: EU | Industry: HEALTHCARE | Action: AUTONOMOUS_TREATMENT</p>
         <p class="text-red-500 font-bold mt-2">Verdict: REQUIRE_WARRANT</p>
-        <p>Reason: BAND_4 clinical action requires sovereign warrant before autonomous execution</p>
+        <p>Reason: HEALTHCARE.MISSING_SOVEREIGN_WARRANT — AUTONOMOUS_TREATMENT maps to consequence band BAND_4; payload has no sovereign_warrant_id (or warrant_id), so warrant-required oversight cannot be attested.</p>
         <p class="text-white mt-4">L0-L8 layer status (excerpt):</p>
         <p>L0  Trust boundary: PASS</p>
         <p>L1  Jurisdiction Router: EU → healthcare stack selected</p>
@@ -154,18 +182,18 @@
   <!-- Request Form Section -->
   <section id="request" class="max-w-2xl mx-auto px-6 py-24 border-t border-gray-900">
     <div class="text-center mb-12">
-      <h2 class="text-3xl font-bold mb-4">Request Sandbox Access</h2>
+      <h2 class="text-3xl font-bold mb-4">Request Extended Evaluation</h2>
       <p class="text-gray-400 mb-2">
-        Sandbox access is granted via GitHub – we need your info to integrate your accounts and confirm your intent to request access.
+        The hosted sandbox at <a id="request-sandbox-link" href="https://sandbox.gnce.co.za" class="text-blue-400 hover:underline">sandbox.gnce.co.za</a> is open for API evaluation.
+        Use this form for extended scenario packs, private repos, or enterprise pilot access.
       </p>
       <p class="text-gray-500 text-sm">
         Restricted to <span class="font-mono">@g42.ai</span>, <span class="font-mono">@openai.com</span>,
         and <span class="font-mono">@microsoft.com</span> verified domains.
       </p>
     </div>
-    <!-- Form submits to Formspree – works with any mail (Gmail, Outlook, Yahoo, webmail). Replace FORMSPREE_FORM_ID with your form ID from https://formspree.io -->
     <form id="sandbox-request-form" action="https://formspree.io/f/xaqpdnvv" method="POST" class="space-y-6">
-      <input type="hidden" name="_subject" value="[GNCE Sandbox Access]" />
+      <input type="hidden" name="_subject" value="[GNCE Extended Evaluation Request]" />
       <input type="hidden" name="_replyto" id="form-replyto" value="" />
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <input
@@ -184,7 +212,7 @@
       <input
         type="text"
         name="github"
-        placeholder="GitHub / GitLab Username"
+        placeholder="GitHub / GitLab Username (optional)"
         class="bg-gray-900 border border-gray-800 p-3 rounded-md w-full focus:border-blue-500 outline-none"
       />
       <textarea
@@ -196,32 +224,60 @@
         type="submit"
         class="w-full bg-gradient-to-r from-blue-600 to-purple-600 py-4 rounded-md font-bold text-lg hover:brightness-110 transition-all uppercase"
       >
-        Authorize Access Request
+        Submit Evaluation Request
       </button>
       <p class="text-xs text-gray-500 text-center mt-2">
         Submits online and is sent to valentine.nsukuzonke@gmail.com. Works from any browser (Gmail, Outlook, Yahoo, etc.).
-      </p>
-      <p class="text-xs text-gray-400 text-center mt-1 font-mono">
-        Requests are sent to: valentine.nsukuzonke@gmail.com
       </p>
     </form>
   </section>
 
   <script>
-    document.getElementById('sandbox-request-form').addEventListener('submit', function () {
-      var emailField = this.querySelector('[name="email"]');
-      if (emailField && emailField.value) {
-        document.getElementById('form-replyto').value = emailField.value;
+    (function () {
+      var cfg = window.GNCE_SANDBOX || {
+        baseUrl: "https://sandbox.gnce.co.za",
+        healthUrl: "https://sandbox.gnce.co.za/healthz",
+        evaluateUrl: "https://sandbox.gnce.co.za/v1/evaluate",
+      };
+
+      var host = cfg.baseUrl.replace(/^https?:\/\//, "");
+      var hostEl = document.getElementById("hero-sandbox-host");
+      if (hostEl) hostEl.textContent = host;
+
+      ["nav-sandbox-link", "hero-try-sandbox", "request-sandbox-link"].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        el.href = id === "hero-try-sandbox" ? cfg.healthUrl : cfg.baseUrl;
+      });
+
+      var healthCurl = document.getElementById("curl-health");
+      if (healthCurl) healthCurl.textContent = "curl -sS " + cfg.healthUrl;
+
+      var evalCurl = document.getElementById("curl-evaluate");
+      if (evalCurl) {
+        evalCurl.textContent =
+          'curl -sS -X POST "' + cfg.evaluateUrl + '" \\\n' +
+          '  -H "Content-Type: application/json" \\\n' +
+          '  -d \'{"action":"PROCESS_PATIENT_DATA","jurisdiction":"UAE","industry_id":"UAE_HEALTHCARE",...}\'';
       }
-    });
+
+      document.getElementById("sandbox-request-form").addEventListener("submit", function () {
+        var emailField = this.querySelector('[name="email"]');
+        if (emailField && emailField.value) {
+          document.getElementById("form-replyto").value = emailField.value;
+        }
+      });
+    })();
   </script>
 
   <!-- Footer -->
   <footer class="py-12 border-t border-gray-900 text-center text-gray-600 text-xs code-font">
     <p class="mb-2">
-      <a href="https://github.com/valentinensukuzonke-source/gnce-sandbox" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-blue-400 transition-colors">Sandbox</a>
+      <a id="footer-sandbox-link" href="https://sandbox.gnce.co.za" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-blue-400 transition-colors">sandbox.gnce.co.za</a>
       <span class="mx-2">·</span>
-      <a href="#request" class="text-gray-500 hover:text-blue-400 transition-colors">Request Access</a>
+      <a href="https://gnce.co.za" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-blue-400 transition-colors">gnce.co.za</a>
+      <span class="mx-2">·</span>
+      <a href="#request" class="text-gray-500 hover:text-blue-400 transition-colors">Extended Evaluation</a>
     </p>
     <p>© 2026 GN Sovereign IP Trust // GNCE Labs – Sovereignty as Code.</p>
   </footer>
