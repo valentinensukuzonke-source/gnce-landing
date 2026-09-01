@@ -42,9 +42,36 @@ npx serve .
 
 Or open `index.html` in a browser (fetch of sample JSON works when served, not from `file://`).
 
-## GitHub Pages
+## GitHub Pages + custom domain
 
-Push to `main`; enable Pages → deploy from branch root. Update `sandbox-config.js` when the public eval URL is live.
+**Live site:** `https://www.gnce.co.za` (after DNS propagates)
+
+### 1. GitHub (this repo)
+
+- **Pages** → Source: **Deploy from branch** → **main** → **`/ (root)`**
+- Custom domain: **`www.gnce.co.za`** (matches [`CNAME`](CNAME) in repo root)
+- Enable **Enforce HTTPS** once certificate is issued
+
+### 2. Cloudflare DNS (`gnce.co.za` zone)
+
+Add or update:
+
+| Type | Name | Target | Proxy |
+|------|------|--------|-------|
+| **CNAME** | `www` | `valentinensukuzonke-source.github.io` | **DNS only** (grey cloud) at first |
+
+After GitHub shows “DNS check successful” and HTTPS is active, you may turn the orange cloud on if desired (SSL mode: **Full**).
+
+Optional apex redirect: Page Rule or Redirect Rule `gnce.co.za` → `https://www.gnce.co.za`.
+
+### 3. Verify
+
+```bash
+curl -sSI https://www.gnce.co.za | head -5
+curl -sS https://sandbox.gnce.co.za/healthz
+```
+
+Sandbox API stays at **`https://sandbox.gnce.co.za`** (separate Cloudflare tunnel — not GitHub Pages).
 
 ## Related repos
 
