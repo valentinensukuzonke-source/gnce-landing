@@ -145,14 +145,18 @@
         <p>Jurisdiction: UAE | Industry: UAE_HEALTHCARE | Hospital: G42_SMART_HOSPITAL_ABU_DHABI</p>
         <p class="text-yellow-400 font-bold mt-2">Verdict: REQUIRE_WARRANT</p>
         <p>Reason: HEALTHCARE_TRANSACTION_INTEGRITY.CONSENT_1 — patient consent cannot be attested; sovereign warrant (L8) required.</p>
-        <p class="text-white mt-4">L0-L8 layer status (excerpt):</p>
+        <p class="text-white mt-4">L0–L8 layer status:</p>
         <p>L0  Trust boundary: PASS</p>
-        <p>L1  Jurisdiction Router: UAE → healthcare stack selected</p>
-        <p>L2  Intent integrity + guardrails: PASS</p>
-        <p>L3  DRE: regime evaluations complete</p>
-        <p>L4  ADRAs forged: healthcare rationale sealed</p>
+        <p>L1  Jurisdiction Router: UAE → 12 regimes selected</p>
+        <p>L2  Rule engines: 80 articles evaluated</p>
+        <p>L3  DRE: 1 violation → REQUIRE_WARRANT | Veto: False</p>
+        <p>L4  ADRAs forged: 12 regime rationale artifacts sealed</p>
+        <p>L5  Lineage &amp; integrity: PASS</p>
+        <p>L6  Metadata &amp; lineage: PASS</p>
         <p>L7  SARS Ledger: PRECOMMIT → MINT → SEAL → FINALIZE</p>
-        <p class="text-white mt-4">Latency: ~150–300 ms kernel (warm ledger)</p>
+        <p>L8  Witness: decision recorded immutably (SARS · Sovereign Audit and Reporting System)</p>
+        <p class="text-gray-400 mt-2">sars_id: sars-b1afd00bf64c4493</p>
+        <p class="text-white mt-4">Total evaluation: ~1018 ms (warm ledger)</p>
       </div>
     </div>
   </section>
