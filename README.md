@@ -46,11 +46,12 @@ Or open `index.html` in a browser (fetch of sample JSON works when served, not f
 
 **Live site:** `https://www.gnce.co.za` (after DNS propagates)
 
-### 1. GitHub (this repo)
+### 1. GitHub (this repo) — one-time
 
-- **Pages** → Source: **Deploy from branch** → **main** → **`/ (root)`**
-- Custom domain: **`www.gnce.co.za`** (matches [`CNAME`](CNAME) in repo root)
-- Enable **Enforce HTTPS** once certificate is issued
+1. Open **Settings → Pages** on this repo.
+2. **Build and deployment → Source:** **GitHub Actions** (workflow [`.github/workflows/pages.yml`](.github/workflows/pages.yml) deploys on every push to `main`).
+3. **Custom domain:** **`www.gnce.co.za`** (must match [`CNAME`](CNAME)).
+4. After DNS verifies, enable **Enforce HTTPS**.
 
 ### 2. Cloudflare DNS (`gnce.co.za` zone)
 
